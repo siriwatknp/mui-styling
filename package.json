@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "jest",
-    "build": "rm -rf dist && babel src --out-dir dist --copy-files",
+    "build": "rm -rf dist && babel src --out-dir dist --ignore '**/*.test.js' --copy-files",
     "prepublish": "yarn build",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
@@ -43,6 +43,7 @@
     "babel-eslint": "^10.0.2",
     "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.6",
+    "babel-plugin-module-resolver": "^3.2.0",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "eslint": "^6.1.0",
@@ -55,11 +56,15 @@
     "husky": "^3.0.1",
     "jest": "^23.6.0",
     "lint-staged": "^9.2.0",
+    "lodash": "^4.17.15",
     "prettier": "^1.18.2",
     "pretty-quick": "^1.11.1",
+    "prop-types": "^15.7.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
-    "regenerator-runtime": "^0.13.1"
+    "regenerator-runtime": "^0.13.1",
+    "typography": "^0.16.19",
+    "typography-theme-fairy-gates": "^0.16.19"
   },
   "dependencies": {
     "@material-ui/core": "^4.3.1"
