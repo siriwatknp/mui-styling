@@ -5,10 +5,11 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "jest",
-    "build": "rm -rf dist && babel src --out-dir dist --ignore '**/*.test.js' --copy-files",
+    "build": "rm -rf dist && babel --no-babelrc src --out-dir dist --copy-files --ignore 'tests'",
     "prepublish": "yarn build",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "deploy-storybook": "storybook-to-ghpages"
   },
   "husky": {
     "hooks": {
@@ -25,7 +26,7 @@
     "styling",
     "react"
   ],
-  "author": "Madelyn Eriksen",
+  "author": "siriwatknp",
   "license": "MIT",
   "devDependencies": {
     "@babel/cli": "^7.2.0",
@@ -62,6 +63,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
+    "react-gist": "^1.2.1",
     "regenerator-runtime": "^0.13.1",
     "typography": "^0.16.19",
     "typography-theme-fairy-gates": "^0.16.19"

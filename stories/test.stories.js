@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
 import { linkTo } from '@storybook/addon-links';
+import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/styles';
 
 import Root from 'tests/Root';
@@ -55,6 +55,12 @@ const OverrideRoot1 = () => {
 };
 
 storiesOf('Test', module)
+  .addDecorator(storyFn => (
+    <Box maxWidth={400} mt={4} mx={'auto'}>
+      {storyFn()}
+    </Box>
+  ))
+  .add('Child', () => <Child />)
   .add('Parent', () => <Parent label={'Option'} />)
   .add('Root', () => <Root items={ITEMS} />)
   .add('CustomRoot1', () => <CustomRoot1 />)

@@ -39,15 +39,15 @@ describe('<Child />', () => {
 
   it('should add new className when receive props: classes', () => {
     const deepComponent = deepShallow(<Child classes={{ childRoot: 'new' }} />);
-    expect(deepComponent.props().className.split(' ').length).toEqual(2);
-    expect(deepComponent.props().className.includes('new')).toEqual(true);
+    expect(deepComponent.dive().props().className.split(' ').length).toEqual(2);
+    expect(deepComponent.dive().props().className.includes('new')).toEqual(true);
   });
 
   it('should use only new className when receive props: overrides', () => {
     const deepComponent = deepShallow(
       <Child overrides={{ childRoot: 'new' }} />,
     );
-    expect(deepComponent.props().className).toEqual('new');
+    expect(deepComponent.dive().props().className).toEqual('new');
   });
 
   // CHILD become nested component in other component
@@ -59,7 +59,7 @@ describe('<Child />', () => {
         })}
       />,
     );
-    expect(deepComponent.props().className).toEqual('new');
+    expect(deepComponent.dive().props().className).toEqual('new');
   });
 
   it('[getOverrides] should add new overriding className', () => {
@@ -67,7 +67,7 @@ describe('<Child />', () => {
       childRoot: 'newOverrides',
     });
     const deepComponent = deepShallow(<Child {...result} />);
-    expect(deepComponent.props().className).toEqual('newOverrides');
+    expect(deepComponent.dive().props().className).toEqual('newOverrides');
   });
 
   it('should override in correct order', () => {
@@ -85,6 +85,6 @@ describe('<Child />', () => {
         )}
       />,
     );
-    expect(deepComponent.props().className).toEqual('childStyles2');
+    expect(deepComponent.dive().props().className).toEqual('childStyles2');
   });
 });

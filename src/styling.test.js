@@ -1,7 +1,4 @@
-import {
-  getStyleAttrs,
-  mergeStyleCreators,
-} from './styling';
+import { getStyleAttrs, mergeStyleCreators } from './styling';
 
 const styles = ({ breakpoints, palette }) => ({
   first: {
@@ -23,10 +20,10 @@ describe('styles utils', () => {
       test1: '',
       test2: '',
     });
-    const createStyles2 = () => ({
+    const createStyles2 = {
       test3: '',
       test4: '',
-    });
+    };
     const createStyles3 = () => ({
       test5: '',
       test6: '',

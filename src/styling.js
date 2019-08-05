@@ -1,14 +1,17 @@
+import React from 'react';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
-import MuiWithStyles from '@material-ui/styles/withStyles';
+import muiWithStyles from '@material-ui/styles/withStyles';
 import camelCase from 'lodash/camelCase';
 import { getRepeatedItems, pick } from './utils';
 
 const baseTheme = createMuiTheme();
 
-export const withStyles = MuiWithStyles;
-
 export const getStyleAttrs = stylesCreator => {
-  return Object.keys(stylesCreator(baseTheme));
+  return Object.keys(
+    typeof stylesCreator === 'function'
+      ? stylesCreator(baseTheme)
+      : stylesCreator,
+  );
 };
 
 export const mergeStyleCreators = (...creators) => theme => {
@@ -30,7 +33,10 @@ export const mergeStyleCreators = (...creators) => theme => {
       );
     }
   }
-  return creators.reduce((a, b) => ({ ...a, ...b(theme) }), {});
+  return creators.reduce(
+    (a, b) => ({ ...a, ...(typeof b === 'function' ? b(theme) : b) }),
+    {},
+  );
 };
 
 export const attachStylingParams = (Component, stylesCreator, options = {}) => {
@@ -52,7 +58,19 @@ export const attachStylingParams = (Component, stylesCreator, options = {}) => {
     };
   };
 
+  Component.displayName = name || Component.displayName;
   Component.styleAttrs = attrs;
   Component.pickClasses = pickClasses;
   Component.getOverrides = getOverrides;
+};
+
+export const withStyles = (styleCreator, options = {}) => WrappedComponent => {
+  const EnhancedComponent = muiWithStyles(styleCreator, options)(props => {
+    const { classes, overrides } = props;
+    return <WrappedComponent {...props} css={overrides || classes} />;
+  });
+
+  attachStylingParams(EnhancedComponent, styleCreator, options);
+
+  return EnhancedComponent;
 };

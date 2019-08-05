@@ -24,15 +24,20 @@ describe('<Root />', function() {
     deepComponent = deepShallow(<Root items={['option']} />);
     getParentProps = wrapper =>
       wrapper
+        .dive()
         .find(Parent)
+        .dive()
         .first()
         .props();
     getChildProps = wrapper =>
       wrapper
+        .dive()
         .find(Parent)
         .dive() // withStyles
         .dive()
+        .dive()
         .find(Child)
+        .dive()
         .first()
         .props();
     // .first()
@@ -76,7 +81,7 @@ describe('<Root />', function() {
     const deepComponent = deepShallow(
       <Root items={['option']} classes={{ root: 'new' }} />,
     );
-    const props = deepComponent.props();
+    const props = deepComponent.dive().props();
     expect(props.className.split(' ')).toHaveLength(2);
     expect(props.className).toMatch('new');
   });
@@ -86,7 +91,7 @@ describe('<Root />', function() {
     const deepComponent = deepShallow(
       <Root items={['option']} overrides={{ root: 'new' }} />,
     );
-    expect(deepComponent.props().className).toEqual('new');
+    expect(deepComponent.dive().props().className).toEqual('new');
   });
 
   // ADD STYLES TO PARENT
@@ -162,7 +167,7 @@ describe('<Root />', function() {
         childOverrides={{ childRoot: 'newChildRoot' }}
       />,
     );
-    expect(deepComponent.props().className).toMatch('root');
+    expect(deepComponent.dive().props().className).toMatch('root');
     const { overrides: parentOverrides } = getParentProps(deepComponent);
     expect(parentOverrides.parentRoot).toEqual('newParentRoot');
 
@@ -182,7 +187,7 @@ describe('<Root />', function() {
         })}
       />,
     );
-    expect(deepComponent.props().className).toEqual('newRoot');
+    expect(deepComponent.dive().props().className).toEqual('newRoot');
     const { overrides: parentOverrides } = getParentProps(deepComponent);
     expect(parentOverrides.parentRoot).toEqual('newParentRoot');
     const { overrides: childOverrides } = getChildProps(deepComponent);
@@ -209,7 +214,7 @@ describe('<Root />', function() {
         )}
       />,
     );
-    expect(deepComponent.props().className).toEqual('newRoot2');
+    expect(deepComponent.dive().props().className).toEqual('newRoot2');
     const { overrides: parentOverrides } = getParentProps(deepComponent);
     expect(parentOverrides.parentRoot).toEqual('newParentRoot2');
     const { overrides: childOverrides } = getChildProps(deepComponent);

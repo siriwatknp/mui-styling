@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Child from 'tests/Child';
-import { attachStylingParams, withStyles } from 'index';
+import { withStyles } from 'index';
+import Child from '../Child';
 import createStyles from './Parent.styles';
 
 const options = { name: 'Parent' };
 
 const Parent = withStyles(createStyles, options)(props => {
-  const { classes, overrides, label } = props;
-  const css = overrides || classes;
+  const { label, css } = props;
   return (
     <div className={css.parentRoot}>
       <p className={css.parentLabel}>{label}</p>
@@ -29,7 +28,5 @@ Parent.defaultProps = {
   classes: undefined,
   childOverrides: undefined,
 };
-
-attachStylingParams(Parent, createStyles, options);
 
 export default Parent;

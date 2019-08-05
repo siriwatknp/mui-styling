@@ -22,6 +22,7 @@ describe('<Parent />', function() {
     deepComponent = deepShallow(<Parent />);
     getChildProps = wrapper =>
       wrapper
+        .dive()
         .find(Child)
         .first()
         .props();
@@ -63,7 +64,7 @@ describe('<Parent />', function() {
     const deepComponent = deepShallow(
       <Parent classes={{ parentRoot: 'new' }} />,
     );
-    const props = deepComponent.props();
+    const props = deepComponent.dive().props();
     expect(props.className.split(' ')).toHaveLength(2);
     expect(props.className.includes('new')).toEqual(true);
   });
@@ -73,7 +74,7 @@ describe('<Parent />', function() {
     const deepComponent = deepShallow(
       <Parent overrides={{ parentRoot: 'new' }} />,
     );
-    expect(deepComponent.props().className).toEqual('new');
+    expect(deepComponent.dive().props().className).toEqual('new');
   });
 
   // ADD NEW STYLES TO CHILD
@@ -90,7 +91,7 @@ describe('<Parent />', function() {
     const deepComponent = deepShallow(
       <Parent overrides={{ childRoot: 'newChildRoot' }} />,
     );
-    expect(deepComponent.className).toBeUndefined();
+    expect(deepComponent.dive().className).toBeUndefined();
     const { overrides } = getChildProps(deepComponent);
     expect(overrides.childRoot.split(' ')).toHaveLength(1);
   });
@@ -99,7 +100,7 @@ describe('<Parent />', function() {
     const deepComponent = deepShallow(
       <Parent childOverrides={{ childRoot: 'newChildRoot' }} />,
     );
-    expect(deepComponent.props().className).toMatch('parentRoot');
+    expect(deepComponent.dive().props().className).toMatch('parentRoot');
     const { overrides } = getChildProps(deepComponent);
     expect(overrides.childRoot).toEqual('newChildRoot');
   });
@@ -114,7 +115,7 @@ describe('<Parent />', function() {
         })}
       />,
     );
-    expect(deepComponent.props().className).toEqual('new');
+    expect(deepComponent.dive().props().className).toEqual('new');
     const { overrides } = getChildProps(deepComponent);
     expect(overrides.childRoot).toEqual('newChildRoot');
   });

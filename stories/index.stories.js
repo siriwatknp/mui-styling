@@ -1,19 +1,52 @@
 import React from 'react';
-
 import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
-import { linkTo } from '@storybook/addon-links';
+import { withLinks } from '@storybook/addon-links';
+import Box from '@material-ui/core/Box';
+import TOC from './docs/TOC';
+import Concept from './docs/Concept';
+import HowItWorks from './docs/HowItWorks';
+import API from './docs/API';
 
-import { Button, Welcome } from '@storybook/react/demo';
+import BasicCustomization from './styling/BasicCustomization';
+import BasicOverrides from './styling/BasicOverrides';
 
-storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
+const gistId = 'ab2b1be16712a1bee0215964e0be267a';
 
-storiesOf('Button', module)
-  .add('with text', () => <Button onClick={action('clicked')}>Hello Button</Button>)
-  .add('with some emoji', () => (
-    <Button onClick={action('clicked')}>
-      <span role="img" aria-label="so cool">
-        😀 😎 👍 💯
-      </span>
-    </Button>
-  ));
+storiesOf('Intro', module)
+  .addDecorator(withLinks)
+  .addDecorator(fn => (
+    <Box bgcolor={'common.white'} minHeight={'100vh'}>
+      <Box maxWidth={732} mx={'auto'} pt={'1px'} px={2}>
+        {fn()}
+      </Box>
+      <Box height={300} />
+    </Box>
+  ))
+  .add('Table of Content', () => <TOC gistId={gistId} />)
+  .add('Concept', () => <Concept gistId={gistId} />)
+  .add('How it works', () => <HowItWorks gistId={gistId} />)
+
+storiesOf('Styling', module)
+  .addDecorator(withLinks)
+  .addDecorator(fn => (
+    <Box bgcolor={'common.white'} minHeight={'100vh'}>
+      <Box maxWidth={732} mx={'auto'} pt={'1px'} px={2}>
+        {fn()}
+      </Box>
+      <Box height={300} />
+    </Box>
+  ))
+  .add('Basic customization', () => <BasicCustomization gistId={gistId} />)
+  .add('Basic overrides', () => <BasicOverrides gistId={gistId} />);
+
+storiesOf('API', module)
+  .addDecorator(withLinks)
+  .addDecorator(fn => (
+    <Box bgcolor={'common.white'} minHeight={'100vh'}>
+      <Box maxWidth={732} mx={'auto'} pt={'1px'} px={2}>
+        {fn()}
+      </Box>
+      <Box height={300} />
+    </Box>
+  ))
+  .add('Reference', () => <API gistId={gistId} />);

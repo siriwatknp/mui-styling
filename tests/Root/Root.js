@@ -1,15 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Parent from 'tests/Parent';
-import { attachStylingParams } from 'index';
+import { withStyles } from 'index';
+import Parent from '../Parent';
 import createStyles from './Root.styles';
 
 const options = { name: 'Root' };
 
 const Root = withStyles(createStyles, options)(props => {
-  const { items, classes, overrides, childOverrides } = props;
-  const css = overrides || classes;
+  const { items, css, childOverrides } = props;
   return (
     <div className={css.root}>
       {items.map(label => (
@@ -39,7 +37,5 @@ Root.defaultProps = {
   childOverrides: undefined,
 };
 Root.displayName = 'Root';
-
-attachStylingParams(Root, createStyles, options);
 
 export default Root;

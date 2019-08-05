@@ -5,8 +5,10 @@ export default mergeStyleCreators(createChildStyles, () => ({
   parentRoot: {
     display: 'flex',
     alignItems: 'center',
-    minHeight: 32,
+    minHeight: 40,
     padding: '0 16px',
+    backgroundColor: '#fff',
+    cursor: 'pointer',
     '&:hover': {
       backgroundColor: '#f7f7f7',
     },
