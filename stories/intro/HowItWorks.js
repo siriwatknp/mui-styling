@@ -26,22 +26,20 @@ const HowItWorks = ({ gistId }) => (
       the custom <code>withStyles</code> attaches some properties to the
       Component that will be used when it becomes a nested component.
     </p>
-    <Gist id={gistId} file={'custom_withStyles'} />
+    <Gist id={gistId} file={'custom_withStyles.jsx'} />
     <p>Here is how it is used in the Parent</p>
-    <Gist id={gistId} file={'getOverrides_usage'} />
+    <Gist id={gistId} file={'getOverrides_usage.jsx'} />
     <p>
       <b>At line 30 : </b> since <code>Child</code>was wrapped with custom
       withStyles, it has extra props named <code>getOverrides</code>{' '}
       automatically. This fn accept (css, props) then it will pass to nested
       component until the last one.
     </p>
-    <h3>Next step</h3>
-    <ul>
-      <li>Customization</li>
-      <li>Total overriding</li>
-      <li>Specific change</li>
-      <li>3-level deep component</li>
-    </ul>
+    <h3>
+      <a href="js:;" data-sb-kind={'styling'} data-sb-story={'basic-customization'}>
+        Next: Basic Customization
+      </a>
+    </h3>
   </div>
 );
 

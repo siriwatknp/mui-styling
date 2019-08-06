@@ -104,6 +104,15 @@ const BasicOverrides = ({ gistId }) => {
           logic but with whole new looks.
         </li>
       </ul>
+      <h3>
+        <a
+          href="js:;"
+          data-sb-kind={'Styling'}
+          data-sb-story={'nested-component'}
+        >
+          Next: Nested Component
+        </a>
+      </h3>
     </div>
   );
 };

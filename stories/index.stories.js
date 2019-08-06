@@ -24,7 +24,7 @@ storiesOf('Intro', module)
       <Box height={300} />
     </Box>
   ))
-  .add('Table of Content', () => <TOC gistId={gistId} />)
+  .add('Table of Content', () => <TOC />)
   .add('Concept', () => <Concept gistId={gistId} />)
   .add('How it works', () => <HowItWorks gistId={gistId} />);
 

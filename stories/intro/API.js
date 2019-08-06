@@ -56,7 +56,7 @@ const API = ({ gistId }) => (
     </h6>
     <p>
       <b>output : </b> new style creator
-      <Gist id={gistId} file={'mergeStyleCreators'} />
+      <Gist id={gistId} file={'mergeStyleCreators.jsx'} />
       Encouraged to use this fn because it will alert in console if it finds out
       there is style attributes collision between style creators.
     </p>

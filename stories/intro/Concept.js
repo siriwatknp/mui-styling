@@ -19,7 +19,7 @@ const Concept = ({ gistId }) => (
       <li>
         <b>Nested Case</b> the component is rendered as a nested one in another
         component. For example,
-        <Gist id={gistId} file={'concept_nested_case'} />
+        <Gist id={gistId} file={'concept_nested_case.jsx'} />
         <img src={concept} />
         In this case, the same styles that <code>Child</code> receive in
         isolated case will be merged to the parent styles which will be transfer
@@ -35,6 +35,11 @@ const Concept = ({ gistId }) => (
     <p>
       <a href="">Read Full Article</a> about the concept & design
     </p>
+    <h3>
+      <a href="js:;" data-sb-kind={'intro'} data-sb-story={'how-it-works'}>
+        Next: How it works
+      </a>
+    </h3>
   </div>
 );
 

@@ -91,9 +91,15 @@ const BasicCustomization = ({ gistId }) => {
         Material-UI
       </blockquote>
       <h3>Next</h3>
-      <a href="js:;" data-sb-kind={'Styling'} data-sb-story={'basic-overrides'}>
-        Basic Overrides (2nd way of customization)
-      </a>
+      <h3>
+        <a
+          href="js:;"
+          data-sb-kind={'Styling'}
+          data-sb-story={'basic-overrides'}
+        >
+          Next: Basic Overrides (2nd way of customization)
+        </a>
+      </h3>
     </div>
   );
 };

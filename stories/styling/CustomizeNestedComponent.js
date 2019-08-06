@@ -101,6 +101,15 @@ const CustomizeNestedComponent = ({ gistId }) => (
       </a>
     </h3>
     <p>Tweet me @siriwatknp</p>
+    <h3>
+      <a
+        href="js:;"
+        data-sb-kind={'api'}
+        data-sb-story={'reference'}
+      >
+        Next: API Reference
+      </a>
+    </h3>
   </div>
 );
 

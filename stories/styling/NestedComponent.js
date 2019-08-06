@@ -60,6 +60,15 @@ const NestedComponent = ({ gistId }) => (
     <p>This is what we got in console.</p>
     <img src={attempt3} />
     <h4>Gotcha! this is how you build nested components.</h4>
+    <h3>
+      <a
+        href="js:;"
+        data-sb-kind={'Styling'}
+        data-sb-story={'customize-nested-component'}
+      >
+        Next: Customize Nested Component
+      </a>
+    </h3>
   </div>
 );
 
