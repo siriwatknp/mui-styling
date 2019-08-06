@@ -4,10 +4,9 @@ import { makeStyles } from '@material-ui/styles';
 import Gist from 'react-gist';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 import Child from 'tests/Child';
-
-import basicCustomInspect from '../../assets/basic_custom_inspect.png';
+import Nav from 'stories/Nav';
+import basicCustomInspect from 'assets/basic_custom_inspect.png';
 
 const useChildStyles = makeStyles(() => ({
   childRoot: {
@@ -31,6 +30,7 @@ const BasicCustomization = ({ gistId }) => {
   const childStyles = useChildStyles();
   return (
     <div>
+      <Nav />
       <h2>Basic Customization</h2>
       <p>
         In this page, we will learn how to correctly customize the component

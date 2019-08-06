@@ -42,6 +42,17 @@ const useOverrideStyles = makeStyles(theme => ({
   test: {},
 }));
 
+const useChildOverrides = makeStyles(() => ({
+  childRoot: {
+    display: 'inline-block',
+    backgroundColor: '#ff5252',
+  },
+  childDot: {
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+}));
+
 const ITEMS = ['Siriwat', 'Kotchakorn', 'Hello World', 'Programming'];
 
 const CustomRoot1 = () => {
@@ -54,6 +65,16 @@ const OverrideRoot1 = () => {
   return <Root items={ITEMS} overrides={styles} />;
 };
 
+const CustomParent = () => {
+  const styles = useCustomStyles();
+  return <Parent label={'Option'} classes={styles} />;
+};
+
+const CustomParent2 = () => {
+  const styles = useChildOverrides();
+  return <Parent label={'Option'} childOverrides={styles} />;
+};
+
 storiesOf('Test', module)
   .addDecorator(storyFn => (
     <Box maxWidth={400} mt={4} mx={'auto'}>
@@ -62,6 +83,8 @@ storiesOf('Test', module)
   ))
   .add('Child', () => <Child />)
   .add('Parent', () => <Parent label={'Option'} />)
+  .add('CustomParent', () => <CustomParent />)
+  .add('CustomParent2', () => <CustomParent2 />)
   .add('Root', () => <Root items={ITEMS} />)
   .add('CustomRoot1', () => <CustomRoot1 />)
   .add('OverrideRoot1', () => <OverrideRoot1 />);

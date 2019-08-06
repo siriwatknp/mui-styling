@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Gist from 'react-gist';
-import Nav from './Nav';
+import Nav from '../Nav';
 
 const API = ({ gistId }) => (
   <div>

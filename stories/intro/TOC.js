@@ -42,8 +42,24 @@ const TOC = () => (
               Basic overrides
             </a>
           </li>
-          <li>Nested component</li>
-          <li>Customize nested component</li>
+          <li>
+            <a
+              href={'js:;'}
+              data-sb-kind="styling"
+              data-sb-story={'nested-component'}
+            >
+              Nested component
+            </a>
+          </li>
+          <li>
+            <a
+              href={'js:;'}
+              data-sb-kind="styling"
+              data-sb-story={'customize-nested-component'}
+            >
+              Customize nested component
+            </a>
+          </li>
           <li>Global theme</li>
         </ul>
       </li>

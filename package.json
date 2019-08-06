@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "jest",
-    "build": "rm -rf dist && babel --no-babelrc src --out-dir dist --copy-files --ignore 'tests'",
+    "build": "rm -rf dist && babel --no-babelrc src --out-dir dist --presets=@babel/react,@babel/env --ignore 'src/**/*.test.js','src/**/*.spec.js'",
     "prepublish": "yarn build",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
@@ -33,6 +33,7 @@
     "@babel/core": "^7.2.0",
     "@babel/preset-env": "^7.2.0",
     "@babel/preset-react": "^7.0.0",
+    "@material-ui/core": "^4.3.1",
     "@material-ui/styles": "^4.3.0",
     "@storybook/addon-actions": "^5.1.10",
     "@storybook/addon-links": "^5.1.10",
@@ -67,8 +68,5 @@
     "regenerator-runtime": "^0.13.1",
     "typography": "^0.16.19",
     "typography-theme-fairy-gates": "^0.16.19"
-  },
-  "dependencies": {
-    "@material-ui/core": "^4.3.1"
   }
 }

@@ -5,7 +5,8 @@ import { makeStyles } from '@material-ui/styles';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Child from 'tests/Child';
-import basicOverrideInspect from '../../assets/basic_override_inspect.png';
+import Nav from 'stories/Nav';
+import basicOverrideInspect from 'assets/basic_override_inspect.png';
 
 const useOverrideStyles = makeStyles(() => ({
   childRoot: {
@@ -35,6 +36,7 @@ const BasicOverrides = ({ gistId }) => {
   const styles = useOverrideStyles();
   return (
     <div>
+      <Nav />
       <h2>Basic Overrides</h2>
       <p>
         What if I don't want to use the default styles, instead I want to use
@@ -81,7 +83,8 @@ const BasicOverrides = ({ gistId }) => {
         <Grid item xs={6}>
           <img src={basicOverrideInspect} />
           <p>
-            there is only 1 className appear in the console (makeStyles-...)
+            there is only 1 className appear in the console (makeStyles-...).
+            The default className (Child-...) is gone due to overrides.
           </p>
         </Grid>
       </Grid>

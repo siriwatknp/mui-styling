@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Gist from 'react-gist';
 import concept from '../../assets/step_5.jpg';
-import Nav from './Nav';
+import Nav from '../Nav';
 
 const Concept = ({ gistId }) => (
   <div>
