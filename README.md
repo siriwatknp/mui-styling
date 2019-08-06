@@ -50,9 +50,9 @@ const createStyles = () => ({
   childDot: { fontSize: 32, lineHeight: 1 },
 });
 
-const Child = withStyles(createStyles)(({ classes }) => {
-  // withStyles will inject an object(named "classes") as props
-  // classes = { childRoot: '{autogen className}', childDot: '{autogen className}' }
+const Child = withStyles(createStyles, { name: 'Child' })(({ css }) => {
+  // withStyles will inject an object(named "css") as props
+  // css = { childRoot: '{autogen className}', childDot: '{autogen className}' }
   return (
     <div className={css.childRoot}>
       <span className={css.childDot}>•</span>
@@ -63,7 +63,7 @@ const Child = withStyles(createStyles)(({ classes }) => {
 expot default Child;
 ```
 
-#### `attachStylingParams(Component: React.Component, styleCreator: fn, options: object)`
+#### `withStyles(styleCreator: fn, options: object)(Component: ReactComponent)`
 
 This fn will attach these properties `stylesAttrs`, `pickClasses` and `getOverrides` to the Component
 
@@ -71,23 +71,14 @@ This fn will attach these properties `stylesAttrs`, `pickClasses` and `getOverri
 Example;
 import React from 'react';
 import PropTypes from 'prop-types';
-import { attachStylingParams, withStyles } from 'mui-styling';
+import { withStyles } from 'index';
+import createStyles from './Child.styles';
 
-const createStyles = () => ({
-  childRoot: {},
-  childDot: { fontSize: 32, lineHeight: 1 },
-});
-
-const options = { name: 'Child' };
-
-const Child = withStyles(createStyles, options)(({ classes, overrides }) => {
-  const css = overrides || classes;
-  return (
-    <div className={css.childRoot}>
-      <span className={css.childDot}>•</span>
-    </div>
-  );
-});
+const Child = withStyles(createStyles, { name: 'Child' })(({ css }) => (
+  <div className={css.childRoot}>
+    <span className={css.childDot}>text</span>
+  </div>
+));
 
 Child.propTypes = {
   overrides: PropTypes.shape({}),
@@ -98,8 +89,8 @@ Child.defaultProps = {
   classes: undefined,
 };
 
-attachStylingParams(Child, createStyles, options);
 // Now 'Child' have these properties that will be used in other components
+// console.log(Child);
 // Child.styleAttrs: ['childRoot', 'childDot'];
 // Child.pickClasses: fn;
 // Child.getOverrides: fn;
@@ -107,7 +98,7 @@ attachStylingParams(Child, createStyles, options);
 export default Child;
 ```
 
-##### `styleAttrs` is an array of attributes that come from createStyles result
+##### `styleAttrs` is an array of attributes that come from createStyles result (styles anatomy)
 
 ##### `pickClasses` is a fn that will pick only attributes that are defined in styleAttrs
 
@@ -176,8 +167,14 @@ this example show how to create nested components with `mui-styling`
 
 ```
 export default () => ({
-  childRoot: {},
-  childDot: { fontSize: 32, lineHeight: 1 },
+  childRoot: {
+    borderRadius: 50,
+    backgroundColor: '#e7e7e7',
+    padding: '4px 12px',
+    display: 'inline-block',
+    lineHeight: 1,
+  },
+  childDot: { fontSize: 18, lineHeight: 1.2 },
 });
 ```
 
@@ -186,23 +183,17 @@ export default () => ({
 ```
 import React from 'react';
 import PropTypes from 'prop-types';
-import { attachStylingParams, withStyles } from 'mui-styling';
+import { withStyles } from 'index';
 import createStyles from './Child.styles';
 
-const options = { name: 'Child' };
-
-const Child = withStyles(createStyles, options)(({ classes, overrides }) => {
-  const css = overrides || classes;
-  return (
-    <div className={css.childRoot}>
-      <span className={css.childDot}>•</span>
-    </div>
-  );
-});
-
-attachStylingParams(Child, createStyles, options);
+const Child = withStyles(createStyles, { name: 'Child' })(({ css }) => (
+  <div className={css.childRoot}>
+    <span className={css.childDot}>text</span>
+  </div>
+));
 
 export default Child;
+
 ```
 
 <br>
@@ -210,15 +201,17 @@ export default Child;
 ##### `Parent.styles.js`
 
 ```
-import { mergeStyleCreators } from 'mui-styling';
+import { mergeStyleCreators } from 'index';
 import { createStyles as createChildStyles } from '../Child';
 
 export default mergeStyleCreators(createChildStyles, () => ({
   parentRoot: {
     display: 'flex',
     alignItems: 'center',
-    minHeight: 32,
+    minHeight: 40,
     padding: '0 16px',
+    backgroundColor: '#fff',
+    cursor: 'pointer',
     '&:hover': {
       backgroundColor: '#f7f7f7',
     },
@@ -234,15 +227,14 @@ export default mergeStyleCreators(createChildStyles, () => ({
 ```
 import React from 'react';
 import PropTypes from 'prop-types';
-import Child from './Child';
-import { attachStylingParams, withStyles } from 'mui-styling';
+import { withStyles } from 'index';
+import Child from '../Child';
 import createStyles from './Parent.styles';
 
 const options = { name: 'Parent' };
 
 const Parent = withStyles(createStyles, options)(props => {
-  const { classes, overrides, label } = props;
-  const css = overrides || classes;
+  const { label, css } = props;
   return (
     <div className={css.parentRoot}>
       <p className={css.parentLabel}>{label}</p>
@@ -251,9 +243,8 @@ const Parent = withStyles(createStyles, options)(props => {
   );
 });
 
-attachStylingParams(Parent, createStyles, options);
-
 export default Parent;
+
 ```
 
 <br>
@@ -261,7 +252,7 @@ export default Parent;
 ##### `Root.styles.js`
 
 ```
-import { mergeStyleCreators } from 'mui-styling';
+import { mergeStyleCreators } from 'index';
 import { createStyles as createParentStyles } from '../Parent';
 
 export default mergeStyleCreators(createParentStyles, () => ({
@@ -275,16 +266,14 @@ export default mergeStyleCreators(createParentStyles, () => ({
 ```
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Parent from './Parent';
-import { attachStylingParams } from 'mui-styling';
+import { withStyles } from 'index';
+import Parent from '../Parent';
 import createStyles from './Root.styles';
 
 const options = { name: 'Root' };
 
 const Root = withStyles(createStyles, options)(props => {
-  const { items, classes, overrides, childOverrides } = props;
-  const css = overrides || classes;
+  const { items, css, childOverrides } = props;
   return (
     <div className={css.root}>
       {items.map(label => (
@@ -299,15 +288,14 @@ const Root = withStyles(createStyles, options)(props => {
   );
 });
 
-Root.displayName = 'Root';
-
-attachStylingParams(Root, createStyles, options);
-
 export default Root;
+
 ```
 
 #### `Page.js`
+
 This is where we use the Root component and try to customize it
+
 ```
 import { makeStyles } from '@material-ui/styles';
 import Root from './Root';
@@ -363,7 +351,8 @@ const OverrideRoot1 = () => {
   return <Root items={ITEMS} overrides={styles} />;
 };
 ```
-## [See Full Demo]()
+
+## [See Full Demo](https://siriwatknp.github.io/mui-styling/?path=/story/intro--table-of-content)
 
 ## Test
 
