@@ -2,6 +2,16 @@
 
 Utilities for building sustainable React Material-UI components
 
+# Table of Content
+
+- #### [Problem](#theproblem)
+- #### [Benefits](#benefits)
+- #### [Storybook Demo](#storybookdemo)
+- #### [Install](#install)
+- #### [Usage](#usage)
+- #### [API](#api)
+- #### [Test](#test)
+
 ## The Problem
 
 [Material-UI](https://material-ui.com) is a great react-component library. it has a lot of base components
@@ -24,6 +34,8 @@ unleash the potential of Material-UI without external library (because it is bas
 - Follow styling best practice
 - Styling with confidence
 
+## [Storybook Demo](https://siriwatknp.github.io/mui-styling/?path=/story/intro--table-of-content)
+
 ## Install
 
 ```
@@ -34,132 +46,7 @@ npm install mui-styling
 yarn add mui-styling
 ```
 
-## API
-
-#### `withStyles(styleCreator: fn, options?: object)`
-
-this is the same [`withStyles`](https://material-ui.com/styles/api/#withstyles-styles-options-higher-order-component) from `@material-ui/styles`. it is exported here for convenient.
-
-```
-Example
-import React from 'react';
-import { withStyles } from 'mui-styling';
-
-const createStyles = () => ({
-  childRoot: {},
-  childDot: { fontSize: 32, lineHeight: 1 },
-});
-
-const Child = withStyles(createStyles, { name: 'Child' })(({ css }) => {
-  // withStyles will inject an object(named "css") as props
-  // css = { childRoot: '{autogen className}', childDot: '{autogen className}' }
-  return (
-    <div className={css.childRoot}>
-      <span className={css.childDot}>•</span>
-    </div>
-  );
-});
-
-expot default Child;
-```
-
-#### `withStyles(styleCreator: fn, options: object)(Component: ReactComponent)`
-
-This fn will attach these properties `stylesAttrs`, `pickClasses` and `getOverrides` to the Component
-
-```
-Example;
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from 'index';
-import createStyles from './Child.styles';
-
-const Child = withStyles(createStyles, { name: 'Child' })(({ css }) => (
-  <div className={css.childRoot}>
-    <span className={css.childDot}>text</span>
-  </div>
-));
-
-Child.propTypes = {
-  overrides: PropTypes.shape({}),
-  classes: PropTypes.shape({}),
-};
-Child.defaultProps = {
-  overrides: undefined,
-  classes: undefined,
-};
-
-// Now 'Child' have these properties that will be used in other components
-// console.log(Child);
-// Child.styleAttrs: ['childRoot', 'childDot'];
-// Child.pickClasses: fn;
-// Child.getOverrides: fn;
-
-export default Child;
-```
-
-##### `styleAttrs` is an array of attributes that come from createStyles result (styles anatomy)
-
-##### `pickClasses` is a fn that will pick only attributes that are defined in styleAttrs
-
-##### `getOverrides` is a fn that return overrides props to the component
-
-#### See implementation
-
-#### `mergeStyleCreators(...creators: arrayOf(styleCreator))`
-
-This fn is used when you create complex component that consist of multiple components
-it returns a new styleCreator
-
-```
-Example
-import { mergeStyleCreators } from 'mui-styling';
-
-const createChildStyles = () => ({
-  childRoot: {
-    color: 'red',
-  },
-})
-
-const createParentStyles = mergeStyleCreators(
-  createChildStyles,
-  () => ({
-    parentRoot: {
-      display: 'flex',
-    },
-  })
-)
-
-```
-
-** The benefit of this fn is that it **warns\*\* you when it find attributes collision.
-
-```
-Example of attributes collision
-import { mergeStyleCreators } from 'mui-styling';
-
-const createChildStyles = () => ({
-  childRoot: {
-    color: 'red',
-  },
-  general: { fontSize: 16 },
-})
-
-const createParentStyles = mergeStyleCreators(
-  createChildStyles,
-  () => ({
-    parentRoot: {
-      display: 'flex',
-    },
-    general: { fontSize: 16 },
-  })
-)
-
-In console
-> mui-styling: Styles collision alert! attributes: [general]. This might cause bugs in styling, please check these style attributes
-```
-
-## Building Components
+## Usage
 
 this example show how to create nested components with `mui-styling`
 
@@ -352,7 +239,130 @@ const OverrideRoot1 = () => {
 };
 ```
 
-## [See Full Demo](https://siriwatknp.github.io/mui-styling/?path=/story/intro--table-of-content)
+## API
+
+#### `withStyles(styleCreator: fn, options?: object)`
+
+this is the same [`withStyles`](https://material-ui.com/styles/api/#withstyles-styles-options-higher-order-component) from `@material-ui/styles`. it is exported here for convenient.
+
+```
+Example
+import React from 'react';
+import { withStyles } from 'mui-styling';
+
+const createStyles = () => ({
+  childRoot: {},
+  childDot: { fontSize: 32, lineHeight: 1 },
+});
+
+const Child = withStyles(createStyles, { name: 'Child' })(({ css }) => {
+  // withStyles will inject an object(named "css") as props
+  // css = { childRoot: '{autogen className}', childDot: '{autogen className}' }
+  return (
+    <div className={css.childRoot}>
+      <span className={css.childDot}>•</span>
+    </div>
+  );
+});
+
+expot default Child;
+```
+
+#### `withStyles(styleCreator: fn, options: object)(Component: ReactComponent)`
+
+This fn will attach these properties `stylesAttrs`, `pickClasses` and `getOverrides` to the Component
+
+```
+Example;
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from 'index';
+import createStyles from './Child.styles';
+
+const Child = withStyles(createStyles, { name: 'Child' })(({ css }) => (
+  <div className={css.childRoot}>
+    <span className={css.childDot}>text</span>
+  </div>
+));
+
+Child.propTypes = {
+  overrides: PropTypes.shape({}),
+  classes: PropTypes.shape({}),
+};
+Child.defaultProps = {
+  overrides: undefined,
+  classes: undefined,
+};
+
+// Now 'Child' have these properties that will be used in other components
+// console.log(Child);
+// Child.styleAttrs: ['childRoot', 'childDot'];
+// Child.pickClasses: fn;
+// Child.getOverrides: fn;
+
+export default Child;
+```
+
+##### `styleAttrs` is an array of attributes that come from createStyles result (styles anatomy)
+
+##### `pickClasses` is a fn that will pick only attributes that are defined in styleAttrs
+
+##### `getOverrides` is a fn that return overrides props to the component
+
+#### See implementation
+
+#### `mergeStyleCreators(...creators: arrayOf(styleCreator))`
+
+This fn is used when you create complex component that consist of multiple components
+it returns a new styleCreator
+
+```
+Example
+import { mergeStyleCreators } from 'mui-styling';
+
+const createChildStyles = () => ({
+  childRoot: {
+    color: 'red',
+  },
+})
+
+const createParentStyles = mergeStyleCreators(
+  createChildStyles,
+  () => ({
+    parentRoot: {
+      display: 'flex',
+    },
+  })
+)
+
+```
+
+** The benefit of this fn is that it **warns\*\* you when it find attributes collision.
+
+```
+Example of attributes collision
+import { mergeStyleCreators } from 'mui-styling';
+
+const createChildStyles = () => ({
+  childRoot: {
+    color: 'red',
+  },
+  general: { fontSize: 16 },
+})
+
+const createParentStyles = mergeStyleCreators(
+  createChildStyles,
+  () => ({
+    parentRoot: {
+      display: 'flex',
+    },
+    general: { fontSize: 16 },
+  })
+)
+
+In console
+> mui-styling: Styles collision alert! attributes: [general]. This might cause bugs in styling, please check these style attributes
+```
 
 ## Test
 
