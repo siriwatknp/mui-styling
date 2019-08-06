@@ -4,13 +4,13 @@ Utilities for building sustainable React Material-UI components
 
 # Table of Content
 
-- #### [Problem](#theproblem)
-- #### [Benefits](#benefits)
-- #### [Storybook Demo](#storybookdemo)
-- #### [Install](#install)
-- #### [Usage](#usage)
-- #### [API](#api)
-- #### [Test](#test)
+- [Problem](#the problem)
+- [Benefits](#benefits)
+- [Storybook Demo](#storybook demo)
+- [Install](#install)
+- [Usage](#usage)
+- [API](#api)
+- [Test](#test)
 
 ## The Problem
 
