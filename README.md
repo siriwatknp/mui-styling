@@ -52,7 +52,7 @@ this example show how to create nested components with `mui-styling`
 
 ##### `Child.styles.js`
 
-```
+```js
 export default () => ({
   childRoot: {
     borderRadius: 50,
@@ -67,7 +67,7 @@ export default () => ({
 
 ##### `Child.js`
 
-```
+```jsx
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'index';
@@ -87,7 +87,7 @@ export default Child;
 
 ##### `Parent.styles.js`
 
-```
+```js
 import { mergeStyleCreators } from 'index';
 import { createStyles as createChildStyles } from '../Child';
 
@@ -111,7 +111,7 @@ export default mergeStyleCreators(createChildStyles, () => ({
 
 ##### `Parent.js`
 
-```
+```jsx
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'index';
@@ -138,7 +138,7 @@ export default Parent;
 
 ##### `Root.styles.js`
 
-```
+```js
 import { mergeStyleCreators } from 'index';
 import { createStyles as createParentStyles } from '../Parent';
 
@@ -150,7 +150,7 @@ export default mergeStyleCreators(createParentStyles, () => ({
 
 ##### `Root.js`
 
-```
+```jsx
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'index';
@@ -183,7 +183,7 @@ export default Root;
 
 This is where we use the Root component and try to customize it
 
-```
+```jsx
 import { makeStyles } from '@material-ui/styles';
 import Root from './Root';
 import Parent from './Parent';
@@ -245,8 +245,8 @@ const OverrideRoot1 = () => {
 
 this is the same [`withStyles`](https://material-ui.com/styles/api/#withstyles-styles-options-higher-order-component) from `@material-ui/styles`. it is exported here for convenient.
 
-```
-Example
+```jsx
+// Example
 import React from 'react';
 import { withStyles } from 'mui-styling';
 
@@ -272,8 +272,8 @@ expot default Child;
 
 This fn will attach these properties `stylesAttrs`, `pickClasses` and `getOverrides` to the Component
 
-```
-Example;
+```jsx
+// Example;
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'index';
@@ -316,8 +316,8 @@ export default Child;
 This fn is used when you create complex component that consist of multiple components
 it returns a new styleCreator
 
-```
-Example
+```jsx
+// Example
 import { mergeStyleCreators } from 'mui-styling';
 
 const createChildStyles = () => ({
@@ -339,8 +339,8 @@ const createParentStyles = mergeStyleCreators(
 
 ** The benefit of this fn is that it **warns\*\* you when it find attributes collision.
 
-```
-Example of attributes collision
+```jsx
+// Example of attributes collision
 import { mergeStyleCreators } from 'mui-styling';
 
 const createChildStyles = () => ({
